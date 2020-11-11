@@ -11,6 +11,7 @@ using Audio.Containers;
 using ScriptableObjects;
 using Antagonists;
 using Systems.Atmospherics;
+using AddressableReferences;
 
 public partial class PlayerNetworkActions : NetworkBehaviour
 {
@@ -29,6 +30,8 @@ public partial class PlayerNetworkActions : NetworkBehaviour
 
 	public Transform chatBubbleTarget;
 
+
+	[SerializeField] private AddressableAudioSource Bodyfall = null;
 	private void Awake()
 	{
 		playerMove = GetComponent<PlayerMove>();
@@ -130,7 +133,8 @@ public partial class PlayerNetworkActions : NetworkBehaviour
 			{
 				// Throw the player down to the floor for 15 seconds.
 				playerScript.registerTile.ServerStun(15);
-				SoundManager.PlayNetworkedAtPos("Bodyfall", transform.position, sourceObj: gameObject);
+				// JESTE_R
+				SoundManager.PlayNetworkedAtPos(Bodyfall, transform.position, sourceObj: gameObject);
 			}
 			else
 			{
@@ -396,7 +400,8 @@ public partial class PlayerNetworkActions : NetworkBehaviour
 				if (oldState == ConsciousState.CONSCIOUS)
 				{
 					//only play the sound if we are falling
-					SoundManager.PlayNetworkedAtPos("Bodyfall", transform.position, sourceObj: gameObject);
+					// JESTE_R
+					SoundManager.PlayNetworkedAtPos(SingletonSOSounds.Instance.Bodyfall, transform.position, sourceObj: gameObject);
 				}
 
 				break;
@@ -408,7 +413,8 @@ public partial class PlayerNetworkActions : NetworkBehaviour
 				if (oldState == ConsciousState.CONSCIOUS)
 				{
 					//only play the sound if we are falling
-					SoundManager.PlayNetworkedAtPos("Bodyfall", transform.position, sourceObj: gameObject);
+					// JESTE_R
+					SoundManager.PlayNetworkedAtPos(SingletonSOSounds.Instance.Bodyfall, transform.position, sourceObj: gameObject);
 				}
 
 				break;

@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 2614019100448779621}
   - component: {fileID: 5586223872053215385}
   m_Layer: 11
-  m_Name: Microwave
+  m_Name: BVOld_Microwave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -204,7 +204,52 @@ MonoBehaviour:
   RunningAudio: {fileID: 82554502596860898}
   ScreenGlow: {fileID: 2324396478013233987}
   OvenGlow: {fileID: 4124619900872816426}
-  MicrowaveTimer: 0
+  doorSound:
+  - SetLoadSetting: 0
+    Path: Assets/Sounds/Prefabs/Effects/Punch1.prefab
+    AssetReference:
+      m_AssetGUID: 95bd68df2ea5fab41942e3f7eb78bed2
+      m_SubObjectName: 
+    Asset: {fileID: 0}
+  - SetLoadSetting: 0
+    Path: Assets/Sounds/Prefabs/Effects/Punch2.prefab
+    AssetReference:
+      m_AssetGUID: 3b95ada4145272448b384e814e57dca1
+      m_SubObjectName: 
+    Asset: {fileID: 0}
+  - SetLoadSetting: 0
+    Path: Assets/Sounds/Prefabs/Effects/Punch3.prefab
+    AssetReference:
+      m_AssetGUID: 14f82e6893ee1754fa6ac1382d17799f
+      m_SubObjectName: 
+    Asset: {fileID: 0}
+  - SetLoadSetting: 0
+    Path: Assets/Sounds/Prefabs/Effects/Punch4.prefab
+    AssetReference:
+      m_AssetGUID: bf7978465bf3551428d902db468e4a0f
+      m_SubObjectName: 
+    Asset: {fileID: 0}
+  doneSound:
+    SetLoadSetting: 0
+    Path: Assets/Sounds/Addressable Prefabs/Machines/Microwave/MicrowaveDing.prefab
+    AssetReference:
+      m_AssetGUID: deddf44457868484d811f2b57b7d619f
+      m_SubObjectName: 
+    Asset: {fileID: 0}
+  startSound:
+    SetLoadSetting: 0
+    Path: Assets/Sounds/Prefabs/Machines/Microwave/MicrowaveStart.prefab
+    AssetReference:
+      m_AssetGUID: 05f2aaf4de2ccb04a9f1db8a3a56d77d
+      m_SubObjectName: 
+    Asset: {fileID: 0}
+  timerSound:
+    SetLoadSetting: 0
+    Path: Assets/Sounds/Prefabs/Machines/Beep.prefab
+    AssetReference:
+      m_AssetGUID: d22a50001283fcd4fa5b54c4f6faed9d
+      m_SubObjectName: 
+    Asset: {fileID: 0}
 --- !u!114 &114643057465573826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -367,18 +412,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  MinimumWorkingVoltage: 190
-  ExpectedRunningVoltage: 240
-  MaximumWorkingVoltage: 300
+  minimumWorkingVoltage: 190
+  expectedRunningVoltage: 240
+  maximumWorkingVoltage: 300
   deviceType: 0
   isSelfPowered: 0
   wattusage: 600
-  Resistance: 100000000
+  resistance: 100000000
   RelatedAPC: {fileID: 0}
   AdvancedControlToScript: 0
   StateUpdateOnClient: 1
-  SelfPowered: 0
   State: 0
+  RecordedVoltage: 0
   conType: 1
 --- !u!114 &2614019100448779621
 MonoBehaviour:
@@ -472,6 +517,7 @@ SpriteRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -529,6 +575,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 53b4b3268f209eb49a64a3bf7bf02393, type: 2}
   - {fileID: 11400000, guid: d61e2ef2c736262499b80a36a26c91ab, type: 2}
   PresentSpriteSet: {fileID: 11400000, guid: a9d9bf1a77c00d44f8434a8bd3be24c7, type: 2}
+  pushTextureOnStartUp: 1
   variantIndex: 0
   palette: []
   Sprites: []
@@ -646,6 +693,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -670,6 +718,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &3951757927092218194
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -744,6 +793,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -768,6 +818,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &1036254836379621743
 MeshFilter:
   m_ObjectHideFlags: 0

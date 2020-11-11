@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Mirror;
 using Firebase.Auth;
+using AddressableReferences;
 
 namespace Lobby
 {
@@ -44,6 +45,9 @@ namespace Lobby
 		public Toggle hostServerToggle;
 		public Toggle autoLoginToggle;
 
+		[SerializeField]
+		private AddressableAudioSource clickSound;
+
 		// Lifecycle
 		void Start()
 		{
@@ -76,7 +80,7 @@ namespace Lobby
 
 		public void ShowCreationPanel()
 		{
-			SoundManager.Play("Click01");
+			SoundManager.Play(clickSound, string.Empty);
 			HideAllPanels();
 			createAccountPanel.SetActive(true);
 			dialogueTitle.text = "Create an Account";
@@ -84,7 +88,7 @@ namespace Lobby
 
 		public void ShowCharacterEditor(Action onCloseAction = null)
 		{
-			SoundManager.Play("Click01");
+			SoundManager.Play(clickSound, string.Empty);
 			HideAllPanels();
 			LobbyManager.Instance.characterCustomization.gameObject.SetActive(true);
 			if (onCloseAction != null)
@@ -154,7 +158,7 @@ namespace Lobby
 
 		public void CreationNextButton()
 		{
-			SoundManager.Play("Click01");
+			SoundManager.Play(clickSound, string.Empty);
 			HideAllPanels();
 			pendingCreationPanel.SetActive(true);
 			nextCreationButton.SetActive(false);
@@ -189,7 +193,7 @@ namespace Lobby
 
 		public void OnLogin()
 		{
-			SoundManager.Play("Click01");
+			SoundManager.Play(clickSound, string.Empty);
 			PerformLogin();
 		}
 
@@ -217,7 +221,7 @@ namespace Lobby
 
 		public void OnLogout()
 		{
-			SoundManager.Play("Click01");
+			SoundManager.Play(clickSound, string.Empty);
 			HideAllPanels();
 			ServerData.Auth.SignOut();
 			NetworkClient.Disconnect();
@@ -230,7 +234,7 @@ namespace Lobby
 
 		public void OnExit()
 		{
-			SoundManager.Play("Click01");
+			SoundManager.Play(clickSound, string.Empty);
 			Application.Quit();
 		}
 
@@ -262,7 +266,8 @@ namespace Lobby
 			resendEmailButton.interactable = false;
 			loggingInText.text =
 				$"A new verification email has been sent to {FirebaseAuth.DefaultInstance.CurrentUser.Email}.";
-			SoundManager.Play("Click01");
+
+			SoundManager.Play(clickSound, string.Empty);
 			FirebaseAuth.DefaultInstance.CurrentUser.SendEmailVerificationAsync();
 			FirebaseAuth.DefaultInstance.SignOut();
 		}
@@ -276,7 +281,7 @@ namespace Lobby
 		// Button handlers
 		public void OnStartGame()
 		{
-			SoundManager.Play("Click01");
+			SoundManager.Play(clickSound, string.Empty);
 
 			// Return if no network address is specified
 			if (string.IsNullOrEmpty(serverAddressInput.text))
@@ -312,13 +317,13 @@ namespace Lobby
 
 		public void OnShowInformationPanel()
 		{
-			SoundManager.Play("Click01");
+			SoundManager.Play(clickSound, string.Empty);
 			ShowInformationPanel();
 		}
 
 		public void OnShowControlInformationPanel()
 		{
-			SoundManager.Play("Click01");
+			SoundManager.Play(clickSound, string.Empty);
 			ShowControlInformationPanel();
 		}
 

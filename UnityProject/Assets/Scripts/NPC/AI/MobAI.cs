@@ -154,7 +154,8 @@ public class MobAI : MonoBehaviour, IServerDespawn
 			registerObject.Passable = true;
 			dirSprites.SetToBodyLayer();
 
-			SoundManager.PlayNetworkedAtPos("Bodyfall", transform.position, sourceObj: gameObject);
+
+			SoundManager.PlayNetworkedAtPos(SingletonSOSounds.Instance.Bodyfall, transform.position, sourceObj: gameObject);
 			dirSprites.SetRotationServer(knockedDownRotation);
 		}
 	}

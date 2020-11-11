@@ -1,0 +1,201 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Music
+  m_EditorClassIdentifier: 
+  m_GroupName: Music
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 5ddbde6d341b5b546b907060a196e63c
+  m_SerializeEntries:
+  - m_GUID: 027e3abcca5fb5341822446fc71b5155
+    m_Address: Assets/Sounds/Music/Tintin on the Moon_Admiral Hippie (Remix).ogg
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AudioFile
+    - TestMusic
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: 0ef648dd0d8ac0bea966686c97e9945d
+    m_Address: Assets/Sounds/Music/The Wizard_Chris Remo.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AudioFile
+    - TestMusic
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: 16cf872069140424f8b667482729fbb9
+    m_Address: Assets/Sounds/Music/Music for manatees_Kevin MacLeod.ogg
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AudioFile
+    - TestMusic
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: 18e13ce0b3d9d45adb4b8024927c864f
+    m_Address: Assets/Sounds/Music/Tintin on the Moon_Cuboos (Remix).ogg
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AudioFile
+    - TestMusic
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: 1b32d4ebcb6a3cd42870aa19672f068f
+    m_Address: Assets/Sounds/Music/another drone_the semen incident.ogg
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AudioFile
+    - TestMusic
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: 23610fdabd00707448f98769221159d6
+    m_Address: Assets/Sounds/Music/The Settler_Chris Remo.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AudioFile
+    - TestMusic
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: 28f5b07a9e93cdb42af5dd9feab731b2
+    m_Address: Assets/Sounds/Music/h-o-n-k-e-r-s_Onulle.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AudioFile
+    - TestMusic
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: 34def0cc1d3a1ed4ab7168c1ed23efcb
+    m_Address: Assets/Sounds/Music/Miniboss Fight_Skidrow.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AudioFile
+    - TestMusic
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: 3b8f26d92fcf00f4d8329c4eeb368fd8
+    m_Address: Assets/Sounds/Music/Marhaba_Ian Alex Mac.ogg
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AudioFile
+    - TestMusic
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: 45da663569100c944a3d1807fa315462
+    m_Address: Assets/Sounds/Music/FlipFlap_X-CEED.ogg
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AudioFile
+    - TestMusic
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: 4649c913777e17c4aaff7105650ce2f8
+    m_Address: Assets/Sounds/Music/Space Asshole_Chris Remo.ogg
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AudioFile
+    - TestMusic
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: 4f2e9aad3d1c0d34bb5bc1da85df4164
+    m_Address: Assets/Sounds/Music/Clownman Redial_Onulle.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AudioFile
+    - TestMusic
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: 5e7b47b72a3f14e46b7cd19ef146cba2
+    m_Address: Assets/Sounds/Music/honkman_Onulle.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AudioFile
+    - TestMusic
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: 74f6bdb281c84f643b71db611e8baca7
+    m_Address: Assets/Sounds/Music/-Sector11_MashedByMachines.ogg
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AudioFile
+    - TestMusic
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: 781b47cfa9e91374e8a60d8ef446e44a
+    m_Address: Assets/Sounds/Music/GBC Robocop Title Theme_Cboyardee (Remix).ogg
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AudioFile
+    - TestMusic
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: aacdb698bd5572f41a48ded5c57a743a
+    m_Address: Assets/Sounds/Music/Endless Space_Solus.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AudioFile
+    - TestMusic
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: bafb85762a3ffb64aa3605e89cc4bec1
+    m_Address: Assets/Sounds/Music/Silent Honk 2 Clon Ending_WanderingShow.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AudioFile
+    - TestMusic
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: c9a6cea5af8c8744aa53c56fe29b907e
+    m_Address: Assets/Sounds/Music/Clown Title_Admiral Hippie.ogg
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AudioFile
+    - TestMusic
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: d73bc2e841c92b44c9a14ddf8171013e
+    m_Address: Assets/Sounds/Music/Journey of the Sorcerer_Admiral Hippie (Remix).mp3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AudioFile
+    - TestMusic
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: dc5330af01368874cb4e307faaa3ce12
+    m_Address: Assets/Sounds/Music/Comet Haley_Stellardrone.ogg
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AudioFile
+    - TestMusic
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: f21c5c0568ead884da3c6128c22af0f2
+    m_Address: Assets/Sounds/Music/The Challenge_Komiku.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AudioFile
+    - TestMusic
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: fdc2ca90f5160b04a9171b3f0114ec1c
+    m_Address: Assets/Sounds/Music/Bug Band Loop_Visager.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AudioFile
+    - TestMusic
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 6b10db3f2322f974da36b41038c570e1, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 54216517af6972b4ba17ea9bbb6707db, type: 2}
+    - {fileID: 11400000, guid: 1f5a7dd2460380f4695cb657780dc98e, type: 2}

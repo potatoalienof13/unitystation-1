@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using AddressableReferences;
 using Mirror;
 using UnityEngine;
 
@@ -12,9 +13,7 @@ public class StunBaton : NetworkBehaviour, IPredictedInteractable<HandActivate>
 	/// <summary>
 	/// Sound played when turning this baton on/off
 	/// </summary>
-	[SerializeField]
-	private string soundToggle = null;
-
+	[SerializeField] private AddressableAudioSource SoundToggle = null;
 	/// <summary>
 	/// Sprite to be shown when the baton is on
 	/// </summary>
@@ -68,7 +67,8 @@ public class StunBaton : NetworkBehaviour, IPredictedInteractable<HandActivate>
 
 	public void ServerPerformInteraction(HandActivate interaction)
 	{
-		SoundManager.PlayNetworkedAtPos(soundToggle, interaction.Performer.AssumedWorldPosServer(), sourceObj: interaction.Performer);
+		SoundManager.PlayNetworkedAtPos(SoundToggle, interaction.Performer.AssumedWorldPosServer(), sourceObj: interaction.Performer);
+
 		ToggleState();
 	}
 }

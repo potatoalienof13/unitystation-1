@@ -209,7 +209,8 @@ namespace Items.PDA
 				sourceObject = gameObject;
 			}
 
-			SoundManager.PlayNetworkedAtPos(soundName, sourceObject.AssumedWorldPosServer(), sourceObj: sourceObject);
+			// JESTE_R
+			//SoundManager.PlayNetworkedAtPos(soundName, sourceObject.AssumedWorldPosServer(), sourceObj: sourceObject);
 		}
 
 		public void PlaySoundPrivate(string soundName)
@@ -217,7 +218,8 @@ namespace Items.PDA
 			var player = GetPlayerByParentInventory();
 			if (player == null) return;
 
-			SoundManager.PlayNetworkedForPlayerAtPos(player, player.AssumedWorldPosServer(), soundName, sourceObj: player);
+			// JESTE_R
+			//SoundManager.PlayNetworkedForPlayerAtPos(player, player.AssumedWorldPosServer(), soundName, sourceObj: player);
 		}
 
 		#endregion Sounds

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 using Systems.Electricity;
+using AddressableReferences;
 
 namespace Objects.Kitchen
 {
@@ -17,8 +18,7 @@ namespace Objects.Kitchen
 	{
 		private const int MAX_TIMER_TIME = 60; // Seconds
 		private const float DIRTY_CHANCE_PER_FINISH = 10; // Percent
-		private const string DOOR_SOUND = "Punch#"; // SFX the microwave door should make when opening/closing.
-		private const string TIMER_BEEP = "Beep"; // Beep to play when timer time is added/removed.
+
 
 		[SerializeField]
 		[Range(0, MAX_TIMER_TIME)]
@@ -58,6 +58,16 @@ namespace Objects.Kitchen
 		public Vector3Int WorldPosition => registerTile.WorldPosition;
 
 		public MicrowaveState currentState;
+
+		[SerializeField] private AddressableAudioSource MicrowaveDing = null;
+		[SerializeField] private AddressableAudioSource TIMER_BEEP = null;
+		[SerializeField] private AddressableAudioSource MicrowaveStart = null;
+		[SerializeField] private AddressableAudioSource DOOR_SOUND = null;
+
+		private const string _DOOR_SOUND = "Punch#"; // SFX the microwave door should make when opening/closing.
+		private const string _TIMER_BEEP = "Beep"; // Beep to play when timer time is added/removed.
+
+
 
 		#region Lifecycle
 
@@ -161,11 +171,13 @@ namespace Objects.Kitchen
 				storedCookable = cookable;
 			}
 
+			// JESTE_R
 			SoundManager.PlayNetworkedAtPos(DOOR_SOUND, WorldPosition, sourceObj: gameObject);
 		}
 
 		private void OpenMicrowaveAndEjectContents()
 		{
+			// JESTE_R
 			SoundManager.PlayNetworkedAtPos(DOOR_SOUND, WorldPosition, sourceObj: gameObject);
 
 			Vector2 spritePosWorld = spriteHandler.transform.position;
@@ -180,7 +192,8 @@ namespace Objects.Kitchen
 		private void StartMicrowave()
 		{
 			UpdateManager.Add(CallbackType.UPDATE, UpdateMe);
-			SoundManager.PlayNetworkedAtPos("MicrowaveStart", WorldPosition, sourceObj: gameObject);
+			// JESTE_R
+			SoundManager.PlayNetworkedAtPos(MicrowaveStart, WorldPosition, sourceObj: gameObject);
 			playAudioLoop = true;
 		}
 
@@ -199,13 +212,15 @@ namespace Objects.Kitchen
 				microwaveTimer += seconds;
 			}
 
+			// JESTE_R
 			SoundManager.PlayNetworkedAtPos(TIMER_BEEP, WorldPosition, sourceObj: gameObject, pitch: seconds < 0 ? 0.8f : 1);
 		}
 
 		private void MicrowaveTimerComplete()
 		{
 			HaltMicrowave();
-			SoundManager.PlayNetworkedAtPos("MicrowaveDing", WorldPosition, sourceObj: gameObject);
+			// JESTE_R
+			SoundManager.PlayNetworkedAtPos(MicrowaveDing, WorldPosition, sourceObj: gameObject);
 
 			// Chance to dirty microwave. Could probably tie this tied into what is cooked instead or additionally.
 			if (UnityEngine.Random.Range(1, 101) < DIRTY_CHANCE_PER_FINISH)

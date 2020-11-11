@@ -48,7 +48,8 @@ public class UIAction : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
 	public void ButtonPress()
 	{
-		SoundManager.Play("Click01");
+		// JESTE_R
+		SoundManager.Play(SingletonSOSounds.Instance.Click01);
 		//calling clientside code
 		if (iActionGUI.ActionData.CallOnClient)
 		{

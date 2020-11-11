@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Timers;
+using AddressableReferences;
 using UnityEngine;
 
 /// <summary>
@@ -30,6 +31,9 @@ public class MeleeStun : MonoBehaviour, ICheckedInteractable<HandApply>
 	/// </summary>
 	[SerializeField]
 	private string stunSound = "EGloves";
+
+	[SerializeField] private AddressableAudioSource StunSound = null;
+
 
 	private StunBaton stunBaton;
 
@@ -83,7 +87,9 @@ public class MeleeStun : MonoBehaviour, ICheckedInteractable<HandApply>
 			}
 
 			registerPlayerVictim.ServerStun(stunTime);
-			SoundManager.PlayNetworkedAtPos(stunSound, target.transform.position, sourceObj: target.gameObject);
+			// JESTE_R
+			SoundManager.PlayNetworkedAtPos(StunSound, target.transform.position, sourceObj: target.gameObject);
+
 			// deactivates the stun and makes you wait;
 
 			// Special case: If we're on help intent (only stun), we should still show the lerp (unless we're hitting ourselves)

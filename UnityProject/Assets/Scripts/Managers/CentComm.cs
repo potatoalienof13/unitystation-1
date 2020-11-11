@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using AddressableReferences;
 using Initialisation;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -22,6 +23,11 @@ public class CentComm : MonoBehaviour
 	[NonSerialized] public string CommandStatusString;
 	[NonSerialized] public string EscapeShuttleTimeString;
 
+	[SerializeField] private AddressableAudioSource Welcome = null;
+	[SerializeField] private AddressableAudioSource InterceptMessage = null;
+
+	[SerializeField] private AddressableAudioSource Commandreport = null;
+
 	public void UpdateStatusDisplay(StatusDisplayChannel channel, string text)
 	{
 		if (channel == StatusDisplayChannel.EscapeShuttle)
@@ -34,6 +40,9 @@ public class CentComm : MonoBehaviour
 		}
 		OnStatusDisplayUpdate.Invoke(channel);
 	}
+
+
+
 
 	public AlertLevel CurrentAlertLevel = AlertLevel.Green;
 
@@ -115,7 +124,8 @@ public class CentComm : MonoBehaviour
 		//Generic AI welcome message
 		//this sound will feel just like home once we have the proper job allocation.
 		//it plays as soon as the round starts.
-		SoundManager.PlayNetworked("Welcome");
+		// JESTE_R
+		SoundManager.PlayNetworked(Welcome);
 		//Wait some time after the round has started
 		yield return WaitFor.Seconds(60f);
 
@@ -170,7 +180,8 @@ public class CentComm : MonoBehaviour
 	}
 	private void SendAntagUpdate()
 	{
-		SoundManager.PlayNetworked("InterceptMessage");
+		// JESTE_R
+		SoundManager.PlayNetworked(InterceptMessage);
 		MakeAnnouncement(CentCommAnnounceTemplate,
 			string.Format(InitialUpdateTemplate,AntagInitialUpdate+"\n\n"+AlertLevelStrings[AlertLevelString.UpToBlue]),
 			UpdateSound.alert);
@@ -257,8 +268,10 @@ public class CentComm : MonoBehaviour
 
 		Chat.AddSystemMsgToChat(string.Format(CentCommAnnounceTemplate, CommandNewReportString), MatrixManager.MainStationMatrix);
 
-		SoundManager.PlayNetworked(UpdateTypes[type], 1f);
-		SoundManager.PlayNetworked("Commandreport");
+		// JESTE_R
+		PlayAnnouncementSound(type);
+		// JESTE_R
+		SoundManager.PlayNetworked(Commandreport);
 	}
 
 	/// <summary>
@@ -267,14 +280,15 @@ public class CentComm : MonoBehaviour
 	/// <param name="template">String that will be the header of the annoucement. We have a couple ready to use </param>
 	/// <param name="text">String that will be the message body</param>
 	/// <param name="type">Value from the UpdateSound enum to play as sound when announcing</param>
-	public static void MakeAnnouncement( string template, string text, UpdateSound type )
+	public static void MakeAnnouncement( string template, string text,UpdateSound type)
 	{
 		if ( text.Trim() == string.Empty )
 		{
 			return;
 		}
 
-		SoundManager.PlayNetworked( UpdateTypes[type] );
+		// JESTE_R
+		PlayAnnouncementSound(type);
 		Chat.AddSystemMsgToChat(string.Format( template, text ), MatrixManager.MainStationMatrix);
 	}
 
@@ -306,7 +320,8 @@ public class CentComm : MonoBehaviour
 
 		Chat.AddSystemMsgToChat(string.Format( PriorityAnnouncementTemplate, string.Format(ShuttleCallSubTemplate,minutes,text) ),
 			MatrixManager.MainStationMatrix);
-		SoundManager.PlayNetworked("ShuttleCalled");
+		// JESTE_R
+		SoundManager.PlayNetworked(SingletonSOSounds.Instance.ShuttleCalled);
 	}
 
 	/// <summary>
@@ -316,7 +331,27 @@ public class CentComm : MonoBehaviour
 	{
 		Chat.AddSystemMsgToChat(string.Format( PriorityAnnouncementTemplate, string.Format(ShuttleRecallSubTemplate,text) ),
 			MatrixManager.MainStationMatrix);
-		SoundManager.PlayNetworked("ShuttleRecalled");
+		// JESTE_R
+		SoundManager.PlayNetworked(SingletonSOSounds.Instance.ShuttleRecalled);
+	}
+
+	public static void PlayAnnouncementSound( UpdateSound type )
+	{
+		switch (type)
+		{
+			case UpdateSound.notice:
+				SoundManager.PlayNetworked(SingletonSOSounds.Instance.AnnouncementNotice, 1f);
+				break;
+			case UpdateSound.announce:
+				SoundManager.PlayNetworked(SingletonSOSounds.Instance.AnnouncementAnnounce, 1f);
+				break;
+			case UpdateSound.alert:
+				SoundManager.PlayNetworked(SingletonSOSounds.Instance.AnnouncementAlert, 1f);
+				break;
+			default:
+				Logger.LogError("No sound has been set for level " + type );
+				break;
+		}
 	}
 
 	private string StationObjectiveReport()

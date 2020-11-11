@@ -1,18 +1,13 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
-using UnityEngine.ResourceManagement;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.Serialization;
-using WebSocketSharp;
-
 
 namespace AddressableReferences
 {
-	/// <summary>
+		/// <summary>
 	/// Note about this class, Currently if you want a custom AssetReference Like asset reference texture, might have to make a new class this needs to be explored
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
@@ -39,7 +34,7 @@ namespace AddressableReferences
 
 		private bool NotValidKey()
 		{
-			if (AssetReference.RuntimeKey == null) return true;
+			if (AssetReference?.RuntimeKey == null && string.IsNullOrEmpty(AssetAddress)) return true;
 			return false;
 		}
 
@@ -49,13 +44,23 @@ namespace AddressableReferences
 			//Just comment the try out if you want to just load by AssetAddress
 			try
 			{
-				await AssetReference.LoadAssetAsync<T>().Task;
-				StoredLoadedReference = AssetReference.Asset as T;
-				return StoredLoadedReference;
+				if (AssetReference.OperationHandle.Status == AsyncOperationStatus.None)
+				{
+					await AssetReference.LoadAssetAsync<T>().Task;
+					StoredLoadedReference = AssetReference.Asset as T;
+					return StoredLoadedReference;
+				}
+				else
+				{
+					await AssetReference.LoadAssetAsync<T>().Task;
+					StoredLoadedReference = AssetReference.Asset as T;
+					return StoredLoadedReference;
+				}
+
 			}
 			catch (Exception e)
 			{
-				if (AssetAddress.IsNullOrEmpty())
+				if (string.IsNullOrEmpty(AssetAddress))
 				{
 					Logger.LogError("Address is null for " + AssetReference.SubObjectName);
 					return null;
@@ -145,6 +150,7 @@ namespace AddressableReferences
 		#endregion
 	}
 
+
 	public enum UnLoadSetting
 	{
 		KeepLoaded, //Keep loaded until the game closes
@@ -159,8 +165,48 @@ namespace AddressableReferences
 		OnDemand //Load and unload when it's needed
 	}
 
-	[System.Serializable]
+	[Serializable]
 	public class AddressableSprite : AddressableReference<Sprite> { }
+
+	[Serializable]
+	public class AddressableAudioSource : AddressableReference<GameObject>
+	{
+		private AudioSource audioSource = null;
+
+		public AudioSource AudioSource
+		{
+			get
+			{
+				if (audioSource == null)
+				{
+					GameObject gameObject = base.Retrieve();
+					if (gameObject == null || !gameObject.TryGetComponent(out audioSource))
+						return null;
+				}
+
+				return audioSource;
+			}
+		}
+
+		/// <summary>
+		/// Constructor that provides an AddressableAudioSource by an AssetReference Primary Key (AssetGuid)
+		/// </summary>
+		/// <param name="assetReferenceGuid">The primary key (AssetGuid) of the AssetReference</param>
+		public AddressableAudioSource(AssetReference assetReference)
+		{
+			AssetReference = assetReference;
+		}
+
+		/// <summary>
+		/// Constructor that provides an AddressableAudioSource by an Addressable path
+		/// </summary>
+		/// <param name="addressablePath">The path of the addressable</param>
+		public AddressableAudioSource(string addressablePath)
+		{
+			AssetAddress = addressablePath;
+		}
+	}
+
 	[System.Serializable]
 	public class AddressableTexture : AddressableReference<Texture> { }
 }

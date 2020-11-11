@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using AddressableReferences;
 using UnityEngine;
 using Mirror;
 using ScriptableObjects;
@@ -27,6 +28,9 @@ namespace Doors
 		private int closedLayer;
 		private int closedSortingLayer;
 		public string openSFX = "AirlockOpen", closeSFX = "AirlockClose";
+
+		[SerializeField] private AddressableAudioSource OpenSFX = null;
+		[SerializeField] private AddressableAudioSource CloseSFX = null;
 
 		private IEnumerator coWaitOpened;
 		private IEnumerator coBlockAutomaticClosing;
@@ -251,7 +255,8 @@ namespace Doors
 			if (openSFX != null)
 			{
 				// Need to play this sound as global - this will ignore muffle effect
-				SoundManager.PlayAtPosition(openSFX, registerTile.WorldPosition, gameObject, polyphonic: true, isGlobal: true);
+				// JESTE_R
+				SoundManager.PlayAtPosition(OpenSFX, "",registerTile.WorldPosition, gameObject, polyphonic: true, isGlobal: true);
 			}
 		}
 
@@ -259,7 +264,8 @@ namespace Doors
 		{
 			if (closeSFX != null)
 			{
-				SoundManager.PlayAtPosition(closeSFX, registerTile.WorldPosition, gameObject, polyphonic: true, isGlobal: true);
+				// JESTE_R
+				SoundManager.PlayAtPosition(CloseSFX, "", registerTile.WorldPosition, gameObject, polyphonic: true, isGlobal: true);
 			}
 		}
 

@@ -1,4 +1,5 @@
 
+using AddressableReferences;
 using UnityEngine;
 
 /// <summary>
@@ -9,7 +10,10 @@ public class Pickaxe : MonoBehaviour, ICheckedInteractable<PositionalHandApply>
 	private static readonly StandardProgressActionConfig ProgressConfig =
 		new StandardProgressActionConfig(StandardProgressActionType.Construction, true);
 
-	private const float PLASMA_SPAWN_CHANCE = 0.5f;
+
+	[SerializeField] private AddressableAudioSource pickaxe = null;
+
+	[SerializeField] private AddressableAudioSource BreakStone = null;
 
 	public bool WillInteract(PositionalHandApply interaction, NetworkSide side)
 	{
@@ -37,7 +41,7 @@ public class Pickaxe : MonoBehaviour, ICheckedInteractable<PositionalHandApply>
 				5f, interaction.Performer);
 		if (bar != null)
 		{
-			SoundManager.PlayNetworkedAtPos("pickaxe#", interaction.WorldPositionTarget, sourceObj: interaction.Performer);
+			SoundManager.PlayNetworkedAtPos(pickaxe, interaction.WorldPositionTarget, sourceObj: interaction.Performer);
 		}
 	}
 
@@ -50,7 +54,7 @@ public class Pickaxe : MonoBehaviour, ICheckedInteractable<PositionalHandApply>
 		}
 		else
 		{
-			SoundManager.PlayNetworkedAtPos("BreakStone", interaction.WorldPositionTarget, sourceObj: interaction.Performer);
+			SoundManager.PlayNetworkedAtPos(BreakStone, interaction.WorldPositionTarget, sourceObj: interaction.Performer);
 			var cellPos = interactableTiles.MetaTileMap.WorldToCell(interaction.WorldPositionTarget);
 
 			var tile = interactableTiles.LayerTileAt(interaction.WorldPositionTarget) as BasicTile;

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using AddressableReferences;
 using Clothing;
 using NPC.AI;
 using UnityEngine;
@@ -12,6 +13,12 @@ namespace NPC
 	{
 		[SerializeField] private List<string> deathSounds = new List<string>();
 		[SerializeField] private List<string> randomSound = new List<string>();
+
+		[SerializeField]
+		protected List<AddressableAudioSource> DeathSounds = new List<AddressableAudioSource>();
+		[SerializeField]
+		protected List<AddressableAudioSource> RandomSound = new List<AddressableAudioSource>();
+
 		[Tooltip("Amount of time to wait between each random sound. Decreasing this value could affect performance!")]
 		[SerializeField]
 		private int playRandomSoundTimer = 3;
@@ -33,6 +40,8 @@ namespace NPC
 		private MobMeleeAction mobMeleeAction;
 		private ConeOfSight coneOfSight;
 		private SimpleAnimal simpleAnimal;
+
+		[SerializeField] private AddressableAudioSource bite = null;
 
 		protected override void Awake()
 		{
@@ -153,7 +162,7 @@ namespace NPC
 
 		protected virtual void PlayRandomSound(bool force = false)
 		{
-			if (IsDead || IsUnconscious || randomSound.Count <= 0)
+			if (IsDead || IsUnconscious || RandomSound.Count <= 0)
 			{
 				return;
 			}
@@ -166,11 +175,14 @@ namespace NPC
 				}
 			}
 
+			// JESTE_R
+
 			SoundManager.PlayNetworkedAtPos(
-				randomSound.PickRandom(),
+			RandomSound.PickRandom(),
 				transform.position,
 				Random.Range(0.9f, 1.1f),
 				sourceObj: gameObject);
+
 
 			Invoke(nameof(PlayRandomSound), playRandomSoundTimer);
 		}
@@ -180,13 +192,18 @@ namespace NPC
 		/// </summary>
 		protected virtual void HandleDeathOrUnconscious()
 		{
-			if (!IsDead || deathSoundPlayed || deathSounds.Count <= 0) return;
+			if (!IsDead || deathSoundPlayed || DeathSounds.Count <= 0) return;
 			deathSoundPlayed = true;
+
+			// JESTE_R
+
 			SoundManager.PlayNetworkedAtPos(
-				deathSounds.PickRandom(),
+				DeathSounds.PickRandom(),
 				transform.position,
 				Random.Range(0.9f, 1.1f),
 				sourceObj: gameObject);
+
+
 			XenoQueenAI.CurrentHuggerAmt -= 1;
 		}
 
@@ -328,12 +345,15 @@ namespace NPC
 				null,
 				verb);
 
+			// JESTE_R
+
 			SoundManager.PlayNetworkedAtPos(
-				"bite",
+				bite,
 				player.gameObject.RegisterTile().WorldPositionServer,
 				1f,
 				true,
 				player.gameObject);
+
 
 			if (success)
 			{

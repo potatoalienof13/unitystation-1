@@ -1,3 +1,4 @@
+using AddressableReferences;
 using System;
 using System.Threading;
 using UnityEngine;
@@ -14,6 +15,9 @@ public class AlertUI : MonoBehaviour
 	[FormerlySerializedAs("restrained")]
 	public GameObject buckled;
 
+	[SerializeField]
+	public AddressableAudioSource clickSound = null;
+
 	public GameObject cuffed;
 	public GameObject pickupMode;
 	public GameObject magBoots;
@@ -26,7 +30,7 @@ public class AlertUI : MonoBehaviour
 	//invoked when the restrained alert is clicked
 	public void OnClickAlertRestrained()
 	{
-		SoundManager.Play("Click01");
+		SoundManager.Play(clickSound, string.Empty);
 		onClickBuckled?.Invoke();
 	}
 
@@ -34,7 +38,7 @@ public class AlertUI : MonoBehaviour
 	public void OnClickCuffed()
 	{
 		PlayerManager.PlayerScript.playerNetworkActions.CmdTryUncuff();
-		SoundManager.Play("Click01");
+		SoundManager.Play(clickSound, string.Empty);
 	}
 
 	/// <summary>
@@ -43,7 +47,7 @@ public class AlertUI : MonoBehaviour
 	public void OnClickSwitchPickupMode()
 	{
 		PlayerManager.PlayerScript.playerNetworkActions.CmdSwitchPickupMode();
-		SoundManager.Play("Click01");
+		SoundManager.Play(clickSound, string.Empty);
 	}
 
 	/// <summary>
@@ -51,7 +55,7 @@ public class AlertUI : MonoBehaviour
 	/// </summary>
 	public void OnClickMagBoots()
 	{
-		SoundManager.Play("Click01");
+		SoundManager.Play(clickSound, string.Empty);
 		magBootsAction?.Invoke();
 	}
 
