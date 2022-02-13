@@ -310,6 +310,19 @@ public partial class MatrixManager : SingletonManager<MatrixManager>
 		return Instance.spaceMatrix.MatrixInfo;
 	}
 
+	public static MatrixInfo GetByName_DEBUG_ONLY(string Name)
+	{
+		for (int i = 0; i < Instance.ActiveMatricesList.Count; i++)
+		{
+			if (Instance.ActiveMatricesList[i].Name == Name)
+			{
+				return Instance.ActiveMatricesList[i];
+			}
+		}
+
+		return null;
+	}
+
 	private static bool IsInMatrix(Vector3Int worldPos, bool isServer, MatrixInfo matrixInfo)
 	{
 		if (matrixInfo.WorldBounds.Contains(worldPos) == false)
@@ -1278,10 +1291,10 @@ public partial class MatrixManager : SingletonManager<MatrixManager>
 			return localPos + matrix.Offset;
 		}
 
-		if (matrix.MetaTileMap.localToWorldMatrix != null)
-		{
-			return matrix.MetaTileMap.localToWorldMatrix.Value.MultiplyPoint(localPos);
-		}
+		// if (matrix.MetaTileMap.localToWorldMatrix != null) //TODO After fixing Shuttle offset and Change movement to local
+		// {
+		// 	return matrix.MetaTileMap.localToWorldMatrix.Value.MultiplyPoint(localPos);
+		// }
 
 		if (state.Equals(default(MatrixState)))
 		{
@@ -1312,10 +1325,10 @@ public partial class MatrixManager : SingletonManager<MatrixManager>
 			return worldPos - matrix.Offset;
 		}
 
-		if (matrix.MetaTileMap.worldToLocalMatrix != null)
-		{
-			return matrix.MetaTileMap.worldToLocalMatrix.Value.MultiplyPoint(worldPos);
-		}
+		// if (matrix.MetaTileMap.worldToLocalMatrix != null) //TODO After fixing Shuttle offset and Change movement to local
+		// {
+		// 	return matrix.MetaTileMap.worldToLocalMatrix.Value.MultiplyPoint(worldPos);
+		// }
 
 
 		var state = matrix.MatrixMove.ClientState;
