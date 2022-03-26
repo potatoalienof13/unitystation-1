@@ -36,6 +36,10 @@ public class Rotatable : NetworkBehaviour, IMatrixRotation
 	[SyncVar(hook = nameof(SyncServerLockAndDirection))]
 	private LockAndDirection SynchroniseCurrentLockAndDirection;
 
+	[SerializeField]
+	[Tooltip("If active will Make it so only If this gameobject is Local player It won't get updates")]
+	private bool IgnoreServerUpdatesIfLocalPlayer= false;
+
 	private SpriteRenderer[] spriteRenderers;
 	private SpriteHandler[] spriteHandlers;
 
@@ -97,9 +101,14 @@ public class Rotatable : NetworkBehaviour, IMatrixRotation
 
 	private void SyncServerDirection(OrientationEnum oldDir, OrientationEnum dir)
 	{
+		if (IgnoreServerUpdatesIfLocalPlayer && isLocalPlayer)
+		{
+			return;
+		}
 		//Seems like headless is running the hook when it shouldn't be
 		//(Mirror bug or our custom code broke something?)
 		if (CustomNetworkManager.IsHeadless) return;
+
 
 		SetDirectionInternal(oldDir, dir);
 	}
@@ -288,15 +297,7 @@ public class Rotatable : NetworkBehaviour, IMatrixRotation
 		public bool Locked;
 		public OrientationEnum LockedTo;
 	}
-
-	public void OnValidate()
-	{
-		Awake();
-		CurrentDirection = CurrentDirection;
-		RotateObject(CurrentDirection);
-		ResitOthers();
-	}
-
+	
 	public void ResitOthers()
 	{
 		if (doNotResetOtherSpriteOptions) return;
